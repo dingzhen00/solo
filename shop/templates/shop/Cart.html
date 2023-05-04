@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<h1 style="text-align: center;">Juice's electronic products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Main Category</th>
+                <th>Sub Category</th>
+                <th>Ratings</th>
+                <th>Number of Ratings</th>
+                <th>Discount Price</th>
+                <th>Actual Price</th>
+                <th>operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for eproduct in page_obj %}
+            <tr>
+                <td>{{ eproduct.eid }}</td>
+                <td>
+                    <div class="scroll" title="{{ eproduct.name }}">
+                        <span class="text">{{ eproduct.name }}</span>
+                    </div>
+                </td>
+                <td>{{ eproduct.main_category }}</td>
+                <td>{{ eproduct.sub_category }}</td>
+                <td>{{ eproduct.ratings }}</td>
+                <td>{{ eproduct.no_of_ratings }}</td>
+                <td>{{ eproduct.discount_price }}</td>
+                <td>{{ eproduct.actual_price }}</td>
+                <td><input type="number"> &nbsp;<button>Add to Cart</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</body>
+</html>

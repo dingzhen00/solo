@@ -1,0 +1,208 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+    <style>
+        .navbar {
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/layui.css' %}" tppabs="http://res.layui.com/layui/dist/css/layui.css"
+          media="all">
+    <script src="{% static 'js/layui.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("td").on("mouseenter", function () {
+                //js主要利用offsetWidth和scrollWidth判断是否溢出。
+                //在这里scrollWidth是包含内容的完全高度，offsetWidth是当前表格单元格的宽度。
+                if (this.offsetWidth < this.scrollWidth) {
+                    var that = this;
+                    var text = $(this).text();
+                    window.layer.tips(text, that, {
+                        tips: 1,
+                        time: 2000
+                    });
+                }
+            });
+        })
+    </script>
+    <style type="text/css">
+        .contain {
+            font-family: ' Microsoft YaHei ';
+            margin: 15px auto;
+            width: 900px;
+        }
+
+        table {
+            border: 1px solid #e3e6e8;
+            border-collapse: collapse;
+            display: table;
+            table-layout: fixed;
+            text-align: center;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #e3e6e8;
+            height: 38px;
+            line-height: 38px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        th {
+            background-color: #189AD6;
+            color: #fff;
+            text-align: center;
+        }
+
+        .layui-layer {
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+    </style>
+
+</head>
+<body>
+
+<ul class="layui-nav" lay-filter=""  style="width:1200px;margin-left: auto;margin-right: auto">
+  <li class="layui-nav-item layui-this"><a onclick="location.href='{% url 'product_list' %}'">商品列表</a></li>
+  <li class="layui-nav-item "><a onclick="location.href='{% url 'index' %}'">返回主菜单</a></li>
+
+  <li class="layui-nav-item" style="float: right">
+      {% if isLogin %}
+    <a href="javascript:;">已登录</a>
+    <dl class="layui-nav-child" style="text-align: center"> <!-- 二级菜单 -->
+        <dd><a onclick="location.href='{% url 'logout' %}'">注销</a></dd>
+    </dl>
+       {% else %}
+    <a href="javascript:;">未登录</a>
+           <dl class="layui-nav-child" style="text-align: center"> <!-- 二级菜单 -->
+        <dd><a onclick="location='{% url 'sign_in' %}'">登录</a></dd>
+    </dl>
+    {% endif %}
+  </li>
+
+</ul>
+
+<script>
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+
+  //…
+});
+</script>
+
+
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#" style="font-size: 20px">Menu</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                     <ul class="nav navbar-nav" style="margin-left: 5px">
+                        <li><a  style="font-size: 16px" onclick="location='/resetcart/'">ReSetCart</a></li>
+
+                    </ul>
+                    <form class="navbar-form navbar-right" action="{% url 'search_results' %}" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control"  name="query" placeholder="Search" value="{{ query }}">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+            <table class="layui-table" STYLE="width: auto;">
+                <colgroup>
+                    <col width="50">
+                    <col width="90">
+                    <col width="150">
+                    <col width="150">
+                    <col width="150">
+                    <col width="150">
+                    <col width="150">
+                    <col width="150">
+                    <col width="200">
+                </colgroup>
+                <thead>
+                    <th style="text-align: center">ID</th>
+                    <th style="text-align: center">Name</th>
+                    <th style="text-align: center">Main Category</th>
+                    <th style="text-align: center">Sub Category</th>
+                    <th style="text-align: center">Ratings</th>
+                    <th style="text-align: center">Number of Ratings</th>
+                    <th style="text-align: center">Discount Price</th>
+                    <th style="text-align: center">Actual Price</th>
+                    <th style="text-align: center">operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for eproduct in page_obj %}
+                    <tr>
+                        <th style="text-align: center">{{ eproduct.eid }}</th>
+                        <td><a href="/detail/?eid={{ eproduct.eid }}">{{ eproduct.name }}</a></td>
+                        <td>{{ eproduct.main_category }}</td>
+                        <td>{{ eproduct.sub_category}}</td>
+                        <td>{{ eproduct.ratings }}</td>
+                        <td>{{eproduct.no_of_ratings }}</td>
+                        <td>{{ eproduct.discount_price }}</td>
+                        <td>{{ eproduct.actual_price  }}</td>
+
+                        <td>
+                            <input type="number" style="width:40px" oninput="if(value<0)value=0" value="{{ eproduct.number }}" id="{{ eproduct.eid }}"> &nbsp;
+                    <a class="btn btn-primary btn-xs" onclick="location='/changecart/?eid={{ eproduct.eid }}&number='+document.getElementById({{ eproduct.eid }}).value" style="border-radius: 0">添加购物车</a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div style="font-size: 17px">
+            <center>
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous page</a>
+                    {% endif %}
+
+            <span class="current-page">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next page</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Last page &raquo;</a>
+            {% endif %}
+                </ul>
+            </center>
+        </div>
+</div>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
+
+

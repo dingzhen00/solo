@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to JUICE Electronic Products Website</title>
+	<!-- 添加Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		h1, .nav-link {
+			text-align: center;
+		}
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+		.btn-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row mt-5">
+			<div class="col-12 text-center">
+				<h1>Welcome to JUICE's electronics website</h1>
+				<p>Discover our latest range of electronics!</p>
+				<a class="btn btn-primary" href="{% url 'product_list' %}">Go to all products page</a>
+				<div class="btn-container">
+					<a class="btn btn-secondary" href="{% url 'register' %}">Registration</a>
+				</div>
+				<div class="btn-container">
+					<a class="btn btn-secondary" href="{% url 'sign_in' %}">Login</a>
+				</div>
+				<div class="btn-container">
+					<a class="btn btn-secondary" href="{% url 'admin_login' %}">Administrator Login</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 添加Bootstrap JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
