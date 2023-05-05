@@ -4,21 +4,30 @@
 	<title>Welcome to JUICE Electronic Products Website</title>
 	<!-- 添加Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	{% load static %}
 	<style>
-		h1, .nav-link {
+		h1, p, .nav-link {
 			text-align: center;
+			color: white;
 		}
 		body {
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			height: 100vh;
+			background-image: url('{% static "index.jpg" %}');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
 		}
 		.btn-container {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			margin-top: 50px;
+		}
+		.btn.btn-primary.white-text {
+			color: white;
 		}
 	</style>
 </head>
@@ -28,15 +37,15 @@
 			<div class="col-12 text-center">
 				<h1>Welcome to JUICE's electronics website</h1>
 				<p>Discover our latest range of electronics!</p>
-				<a class="btn btn-primary" href="{% url 'product_list' %}">Go to all products page</a>
+				<a class="btn btn-primary white-text" href="{% url 'product_list' %}">Go to all products page</a>
 				<div class="btn-container">
-					<a class="btn btn-secondary" href="{% url 'register' %}">Registration</a>
+					<a class="btn btn-primary white-text" href="{% url 'register' %}">Registration</a>
 				</div>
 				<div class="btn-container">
-					<a class="btn btn-secondary" href="{% url 'sign_in' %}">Login</a>
+					<a class="btn btn-primary white-text" href="{% url 'sign_in' %}">Login</a>
 				</div>
 				<div class="btn-container">
-					<a class="btn btn-secondary" href="{% url 'admin_login' %}">Administrator Login</a>
+					<a class="btn btn-primary white-text" href="{% url 'admin_login' %}">Administrator Login</a>
 				</div>
 			</div>
 		</div>
@@ -47,6 +56,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
 
 
 

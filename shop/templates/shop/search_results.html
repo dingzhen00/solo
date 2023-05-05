@@ -68,6 +68,14 @@
             word-wrap: break-word;
         }
     </style>
+    <style>
+        body {
+            background-image: url("{% static 'back.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+    </style>
 
 </head>
 <body>
@@ -78,9 +86,9 @@
 
   <li class="layui-nav-item" style="float: right">
       {% if isLogin %}
-    <a href="javascript:;">Logged in</a>
+    <a href="javascript:;">Logged</a>
     <dl class="layui-nav-child" style="text-align: center"> 
-        <dd><a onclick="location.href='{% url 'logout' %}'">Log out</a></dd>
+        <dd><a onclick="location.href='{% url 'logout' %}'">Logout</a></dd>
     </dl>
        {% else %}
     <a href="javascript:;">Not logged in</a>
@@ -93,6 +101,7 @@
 </ul>
 
 <script>
+
 layui.use('element', function(){
   var element = layui.element;
 
@@ -171,7 +180,7 @@ layui.use('element', function(){
 
                         <td>
                             <input type="number" style="width:40px" oninput="if(value<0)value=0" value="{{ eproduct.number }}" id="{{ eproduct.eid }}"> &nbsp;
-                    <a class="btn btn-primary btn-xs" onclick="location='/changecart/?eid={{ eproduct.eid }}&number='+document.getElementById({{ eproduct.eid }}).value" style="border-radius: 0">Add to Cart</a>
+                    <a class="btn btn-primary btn-xs" onclick="location='/changecart/?eid={{ eproduct.eid }}&number='+document.getElementById({{ eproduct.eid }}).value" style="border-radius: 0">Add to cart</a>
 
                         </td>
                     </tr>
@@ -182,7 +191,8 @@ layui.use('element', function(){
             <center>
                 <ul class="pagination">
                     {% if page_obj.has_previous %}
-                    <a href="?query={{ query }}&page=1">&laquo; first</a>
+                    <a href="?query={{ query }}&page=1" style="color: #FFFFFF">&laquo; first</a>
+
                     <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}">Previous page</a>
                     {% endif %}
 
