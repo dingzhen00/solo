@@ -19,8 +19,7 @@
     <script type="text/javascript">
         $(function () {
             $("td").on("mouseenter", function () {
-                //js主要利用offsetWidth和scrollWidth判断是否溢出。
-                //在这里scrollWidth是包含内容的完全高度，offsetWidth是当前表格单元格的宽度。
+
                 if (this.offsetWidth < this.scrollWidth) {
                     var that = this;
                     var text = $(this).text();
@@ -80,12 +79,12 @@
   <li class="layui-nav-item" style="float: right">
       {% if isLogin %}
     <a href="javascript:;">Logged in</a>
-    <dl class="layui-nav-child" style="text-align: center"> <!-- 二级菜单 -->
+    <dl class="layui-nav-child" style="text-align: center"> 
         <dd><a onclick="location.href='{% url 'logout' %}'">logout</a></dd>
     </dl>
        {% else %}
     <a href="javascript:;">Not logged in</a>
-           <dl class="layui-nav-child" style="text-align: center"> <!-- 二级菜单 -->
+           <dl class="layui-nav-child" style="text-align: center"> 
         <dd><a onclick="location='{% url 'sign_in' %}'">login</a></dd>
     </dl>
     {% endif %}
@@ -94,7 +93,7 @@
 </ul>
 
 <script>
-//注意：导航 依赖 element 模块，否则无法进行功能性操作
+
 layui.use('element', function(){
   var element = layui.element;
 

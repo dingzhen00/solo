@@ -19,8 +19,7 @@
     <script type="text/javascript">
         $(function () {
             $("td").on("mouseenter", function () {
-                //js主要利用offsetWidth和scrollWidth判断是否溢出。
-                //在这里scrollWidth是包含内容的完全高度，offsetWidth是当前表格单元格的宽度。
+
                 if (this.offsetWidth < this.scrollWidth) {
                     var that = this;
                     var text = $(this).text();
@@ -74,19 +73,19 @@
 <body>
 
 <ul class="layui-nav" lay-filter=""  style="width:1200px;margin-left: auto;margin-right: auto">
-  <li class="layui-nav-item layui-this"><a onclick="location.href='{% url 'product_list' %}'">商品列表</a></li>
-  <li class="layui-nav-item "><a onclick="location.href='{% url 'index' %}'">返回主菜单</a></li>
+  <li class="layui-nav-item layui-this"><a onclick="location.href='{% url 'product_list' %}'">Product List</a></li>
+  <li class="layui-nav-item "><a onclick="location.href='{% url 'index' %}'">Back to main menu</a></li>
 
   <li class="layui-nav-item" style="float: right">
       {% if isLogin %}
-    <a href="javascript:;">已登录</a>
-    <dl class="layui-nav-child" style="text-align: center"> <!-- 二级菜单 -->
-        <dd><a onclick="location.href='{% url 'logout' %}'">注销</a></dd>
+    <a href="javascript:;">Logged in</a>
+    <dl class="layui-nav-child" style="text-align: center"> 
+        <dd><a onclick="location.href='{% url 'logout' %}'">Log out</a></dd>
     </dl>
        {% else %}
-    <a href="javascript:;">未登录</a>
-           <dl class="layui-nav-child" style="text-align: center"> <!-- 二级菜单 -->
-        <dd><a onclick="location='{% url 'sign_in' %}'">登录</a></dd>
+    <a href="javascript:;">Not logged in</a>
+           <dl class="layui-nav-child" style="text-align: center"> 
+        <dd><a onclick="location='{% url 'sign_in' %}'">Login</a></dd>
     </dl>
     {% endif %}
   </li>
@@ -94,7 +93,6 @@
 </ul>
 
 <script>
-//注意：导航 依赖 element 模块，否则无法进行功能性操作
 layui.use('element', function(){
   var element = layui.element;
 
@@ -134,7 +132,8 @@ layui.use('element', function(){
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-            <table class="layui-table" STYLE="width: auto;">
+        </div>
+  <table class="layui-table" STYLE="width:130px;text-align: center;margin-left: auto;margin-right: auto">
                 <colgroup>
                     <col width="50">
                     <col width="90">
@@ -172,20 +171,19 @@ layui.use('element', function(){
 
                         <td>
                             <input type="number" style="width:40px" oninput="if(value<0)value=0" value="{{ eproduct.number }}" id="{{ eproduct.eid }}"> &nbsp;
-                    <a class="btn btn-primary btn-xs" onclick="location='/changecart/?eid={{ eproduct.eid }}&number='+document.getElementById({{ eproduct.eid }}).value" style="border-radius: 0">添加购物车</a>
+                    <a class="btn btn-primary btn-xs" onclick="location='/changecart/?eid={{ eproduct.eid }}&number='+document.getElementById({{ eproduct.eid }}).value" style="border-radius: 0">Add to Cart</a>
 
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
         <div style="font-size: 17px">
             <center>
                 <ul class="pagination">
                     {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">Previous page</a>
+                    <a href="?query={{ query }}&page=1">&laquo; first</a>
+                    <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}">Previous page</a>
                     {% endif %}
 
             <span class="current-page">
@@ -193,8 +191,8 @@ layui.use('element', function(){
             </span>
 
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Next page</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Last page &raquo;</a>
+                <a href="?query={{ query }}&page={{ page_obj.next_page_number }}">Next page</a>
+                <a href="?query={{ query }}&page={{ page_obj.paginator.num_pages }}">Last page &raquo;</a>
             {% endif %}
                 </ul>
             </center>

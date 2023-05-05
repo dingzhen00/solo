@@ -21,8 +21,7 @@
     <script type="text/javascript">
         $(function () {
             $("td").on("mouseenter", function () {
-                //js主要利用offsetWidth和scrollWidth判断是否溢出。
-                //在这里scrollWidth是包含内容的完全高度，offsetWidth是当前表格单元格的宽度。
+
                 if (this.offsetWidth < this.scrollWidth) {
                     var that = this;
                     var text = $(this).text();
@@ -82,7 +81,7 @@
 
   <li class="layui-nav-item" style="float: right">
     <a href="javascript:;">Welcome! Administrators</a>
-    <dl class="layui-nav-child" style="text-align: center"> <!-- 二级菜单 -->
+    <dl class="layui-nav-child" style="text-align: center"> 
         <dd><a onclick="location.href='{% url 'logout' %}'">logout</a></dd>
     </dl>
 
@@ -91,7 +90,7 @@
 </ul>
 
 <script>
-//注意：导航 依赖 element 模块，否则无法进行功能性操作
+
 layui.use('element', function(){
   var element = layui.element;
 
@@ -103,7 +102,7 @@ layui.use('element', function(){
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
+
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                             data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -133,7 +132,7 @@ layui.use('element', function(){
                 </colgroup>
                 <thead>
                    <th>订单ID</th>
-                <th style="text-align: center">订单详情
+                <th style="text-align: center">Order details
                     <table><tr>
                    <th style="width: 50px">ID</th>
                 <th style="width: 100px">Name</th>
@@ -146,10 +145,10 @@ layui.use('element', function(){
                         <th style="width: 80px">count</th>
                     </tr>
                 </table></th>
-                <th>订单金额</th>
-                <th style="text-align: center">订单时间</th>
-                <th>用户ID</th>
-                <th>用户名</th>
+                <th>Order amount</th>
+                <th style="text-align: center">Order time</th>
+                <th>User ID</th>
+                <th>User account</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -210,7 +209,7 @@ layui.use('element', function(){
 
 
                 title: {
-                    text: '本月销售数量',
+                    text: 'Number of sales for the month',
                     left: "center",
                 },
                 tooltip: {

@@ -51,7 +51,10 @@ def products_list(request):
 
 
 def search_results(request):
-    query = request.POST.get('query')
+    if request.method=='GET':
+        query = request.GET.get('query')
+    else:
+        query = request.POST.get('query')
     if query=='':
         return redirect('product_list')
     products = eletronics.objects.filter(name__icontains=query)
@@ -89,14 +92,14 @@ def sign_in(request):
         username = request.POST['username']
         password = request.POST['password']
         if not username or not password:
-            messages.error(request, '请输入用户名和密码。')
+            messages.error(request, 'Please enter username and password.')
             return render(request, 'shop/sign_in.html')
         user = User.objects.filter(username=username, password=password)
         if user:
             request.session['id'] = user.first().id
             return redirect('product_list')
         else:
-            messages.error(request, '用户名或密码错误，请重新输入。')
+            messages.error(request, 'Incorrect username or password.')
             return render(request, 'shop/sign_in.html')
 
     else:
@@ -134,22 +137,19 @@ def admin_login(request):
         password = request.POST.get('password')
         user = User.objects.filter(username=username, password=password)
         if username=='' or password=='':
-            messages.error(request, '用户名或密码不能为空，请重试。')
+            messages.error(request, 'Username or password cannot be empty, please try again.')
             return render(request, 'shop/admin_login.html')
         if user:
-            # 登录成功，重定向到管理员页面
             if str(user.values('identity').first()['identity']) == 'admin':
                 request.session['id'] = user.first().id
                 return redirect('admin_in')
         elif user:
-            # 登录失败，返回错误信息
-            messages.error(request, '非管理员禁止进入。')
+            messages.error(request, 'Access is forbidden to non-administrators.')
             return render(request, 'shop/admin_login.html')
         else:
-            messages.error(request, '用户名或密码错误，请重试。')
+            messages.error(request, 'Incorrect username or password, please try again.')
             return render(request, 'shop/admin_login.html')
     else:
-        # 显示登录页面
         return render(request, 'shop/admin_login.html')
 
 def admindetail(request):
@@ -236,11 +236,11 @@ def getdata(request):
                     count += int(pro.number)
         date.append(data2)
         num.append(count)
-    legends = ['销售数量']
+    legends = ['Number of sales']
     x_axis = date
     series_list = [
         {
-            "name": '销售数量',
+            "name": 'Number of sales',
             "type": 'bar',
             "data": num
         },
