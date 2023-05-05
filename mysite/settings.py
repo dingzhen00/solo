@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_9-fx=iou+p64(2!c(ar%dqw!*np&k()7pf5w5p(4h@6lw+*r1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['jaguardanube-normalslalom-8000.codio-box.uk', 'products-app3.onrender.com','localhost']
+ALLOWED_HOSTS = ['jaguardanube-normalslalom-8000.codio-box.uk', 'products-app3.onrender.com','products-app6.onrender.com','localhost']
 
 # Application definition
 
