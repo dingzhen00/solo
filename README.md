@@ -1,3 +1,5 @@
+## The completed web project can be viewed through the following link
+Access via this link：https://products-app6.onrender.com/
 ## Main templates of the website:
 - index.html
   - The home page of the website, which provides access to various pages including product listings, login, registration and administration login pages
