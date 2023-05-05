@@ -155,13 +155,24 @@ def admin_login(request):
 def admindetail(request):
     User.objects.create(username='admin222',password='admin222',identity='admin')
     return redirect('index')
+    
+#def changecart(request):
+    #eid = request.GET.get('eid')
+    #number = request.GET.get('number')
+    #request.session[eid] = number
+    #print(str(eid) + " " + str(number))
+    #return redirect('product_list')
+    
 def changecart(request):
-    eid = request.GET.get('eid')
-    number = request.GET.get('number')
+    if request.method=='POST':
+        eid = request.POST.get('eid')
+        number = request.POST.get('number')
+    else:
+        eid = request.GET.get('eid')
+        number = request.GET.get('number')
     request.session[eid] = number
     print(str(eid) + " " + str(number))
-    return redirect('product_list')
-
+    return JsonResponse({'code':100})
 
 def resetcart(request):
     products = eletronics.objects.all()
