@@ -1,7 +1,7 @@
 import csv
 
 from django.shortcuts import render, redirect
-from shop.models import eletronics, User, eletronicsdetail, Order
+from shop.models import eletronics, User, eletronicsdetail, Order, Part
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_protect
@@ -9,6 +9,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import time
 import calendar
 from django.http import JsonResponse
+import datetime
+
 
 def products_list(request):
     products = eletronics.objects.all().order_by('eid')
@@ -194,7 +196,8 @@ def createOrder(request):
     for i in products:
         number = request.session.get(str(i.eid))
         if number is not None:
-            amount += int(number) * i.actual_price
+            price=str(i.actual_price).replace('₹','').replace(',','')
+            amount += int(number) * int(price)
             part=Part.objects.create(eletronics=i,number=int(number))
             Parts.append(part)
     uid=request.session.get('id')

@@ -17,4 +17,5 @@ urlpatterns = [
     path('logout/',views.logout, name='logout'),
     path('detail/',views.detail, name='detail'),
     path('chufa/',views.admindetail, name='chufa'),
+    path('createOrder/',views.createOrder, name='createOrder'),
 ]
