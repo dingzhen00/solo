@@ -1,5 +1,7 @@
 ## The completed web project can be viewed through the following link
 Access via this link：https://products-app6.onrender.com/
+## github link
+Access via this link：https://github.com/dingzhen00/solo
 ## Main templates of the website:
 - index.html
   - The home page of the website, which provides access to various pages including product listings, login, registration and administration login pages
@@ -8,8 +10,10 @@ Access via this link：https://products-app6.onrender.com/
 - register.html
   - The corresponding button name is __Registration__.Go to the user registration screen and register as a user, after registration you can perform the billing function, ordinary visitors cannot be billed
 - sign_in.html
+  - __Already created username: 111/password 111,You can also create your own account and password__.
   - The login page, with the corresponding button __Log in__, allows you to log in as a user and check out your orders once you have done so.
 - admin_login.html
+  - __Administrator account: admin111/password: admin111, if you need to access please enter this account password__
   - The corresponding button name is __Administrator Login__.Go to the admin login page, only admins can login
 - admin_in.html
   - The page after the administrator enters, showing the number of orders, order information and a chart of the total order quantity
